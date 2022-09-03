@@ -33,8 +33,15 @@ const clickCatagory = ctgNumber =>{
 const setNewsCard = cards =>{
      const setId = document.getElementById('news-card')
      setId.innerHTML = '';
-
      
+     const foundResult = document.getElementById('found-result')
+     if(cards.length !== 0){
+          const cardsNumber = cards.length
+          foundResult.innerText = cardsNumber  + ' ' +'items found';  
+     }
+     else{
+          return foundResult.innerText = 'no items found'; 
+     }
 
      for( const card of cards ){
           const div = document.createElement('div')
