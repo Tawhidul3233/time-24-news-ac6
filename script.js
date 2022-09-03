@@ -12,7 +12,7 @@ const setCatagory = catagorys =>{
           const div = document.createElement('div');
           div.classList.add('navbar','navbar-expand-lg')
           div.innerHTML = `
-               <div class="col-lg-12 col-6">
+               <div class="col-lg-12 col-md-10">
                     <a  onclick=clickCatagory('${catagory.category_id}') class="  nav-link active" aria-current="page" href="#">${catagory.category_name}</a>
                </div>
           
@@ -63,10 +63,15 @@ const setNewsCard = cards =>{
                                    <p class="autherText m-0 fs-6 fw-light">${card.author.name}</p>
                                    <p class="autherText m-0 fs-6 fw-light">${card.author.published_date}</p>
                               </div>
-                              <div class="col-6 d-flex ">
+                              <div class="col-3 d-flex ">
                                    <i class="fa-solid fa-users-viewfinder align-self-center"></i>
                                    <p class="align-self-center m-0 ps-3 fw-semibold">  ${card.total_view} </p>
                                    
+                              </div>
+                              <div class="col-3"> 
+                                   <button onclick= type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                   Show Details
+                                   </button>
                               </div>
                          </div>
                     </div>
@@ -78,6 +83,9 @@ const setNewsCard = cards =>{
      }
 
 }
+
+
+const 
 
 
 
