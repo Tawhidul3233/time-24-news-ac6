@@ -69,7 +69,7 @@ const setNewsCard = cards =>{
                                    
                               </div>
                               <div class="col-3"> 
-                                   <button onclick= type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                   <button onclick=clickCatagory('${card.title}'); type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                    Show Details
                                    </button>
                               </div>
@@ -85,7 +85,16 @@ const setNewsCard = cards =>{
 }
 
 
-const 
+const openModal = (ppppp)=>{
+     const ggg = clickCatagory()
+     console.log(ggg)
+     const modalBody = document.getElementById('modal-body')
+     modalBody.innerHTML = `
+     <h5 class="modal-title" id="staticBackdropLabel">'${ppppp}'</h5>
+     <p>ghfggjgfhjghj</p>
+     
+     `
+}
 
 
 
