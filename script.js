@@ -13,7 +13,7 @@ const setCatagory = catagorys =>{
           div.classList.add('navbar','navbar-expand-lg')
           div.innerHTML =  `
           
-           <div class="col-lg-12 col-md-10">
+           <div class="">
                <a  onclick=clickCatagory('${catagory.category_id}')  class="  nav-link active" aria-current="page" href="#">${catagory.category_name}</a>
           </div> 
 
@@ -65,7 +65,7 @@ const setNewsCard = cards =>{
                                    <img  class="col-8 rounded-circle" src="${card.author.img}" alt=""> 
                               </div>
                               <div class="col-4 align-self-center">
-                                   <p class="autherText m-0 fs-6 fw-light">${card.author.name}</p>
+                                   <p class="autherText m-0 fs-6 fw-light">${card.author.name ? card.author.name:'Author name hidden' }</p>
                                    <p class="autherText m-0 fs-6 fw-light">${card.author.published_date}</p>
                               </div>
                               <div class="col-3 d-flex ">
@@ -74,7 +74,7 @@ const setNewsCard = cards =>{
                                    
                               </div>
                               <div class="col-3"> 
-                                   <button onclick=openModel('${card._id}'); type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                   <button onclick=openModel('${card._id}') type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                    Show Details
                                    </button>
                               </div>
@@ -105,7 +105,7 @@ const modelBox = (details)=> {
           div.classList.add('modal-body')
           div.innerHTML = `
                <img class="w-75 ms-5" src="${detail.author.img}" alt="">
-               <p class="m-0 mt-3"> ${detail.author.name} </p>
+               <p class="m-0 mt-3"> ${detail.author.name ? detail.author.name : "Authore Name hidden"} </p>
                <p class="m-0"> ${detail.author.published_date} </p>
                <p class="my-3 fs-2 fw-semibold"> ${detail.title} </p>
                <p class=""> ${detail.details} </p>
