@@ -74,7 +74,7 @@ const setNewsCard = cards =>{
                                    
                               </div>
                               <div class="col-3"> 
-                                   <button onclick=openModel('${card._id}') type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                   <button onclick=openModel('${card._id}') type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                    Show Details
                                    </button>
                               </div>
@@ -110,6 +110,7 @@ const modelBox = (details)=> {
                <p class="m-0"> ${detail.author.published_date}  </p>
                <p class="my-3 fs-2 fw-semibold"> ${detail.title} </p>
                <p class="my-2 fs-5 fw-semibold"> Total  :  ${detail.total_view} view </p>
+               <p class="my-2 fs-6 fw-semibold "> Rating  :  ${detail.rating.badge ? detail.rating.badge : 'No rating '} ${detail.rating.number ? detail.rating.number :'No point'} </p>
                <p class=""> ${detail.details} </p>
                
           `
