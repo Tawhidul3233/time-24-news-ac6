@@ -8,18 +8,22 @@ const showCatagory = () =>{
 
 const setCatagory = catagorys =>{
      const setId = document.getElementById('catagory');
-     for(const catagory of catagorys){
+     catagorys.forEach(catagory =>{
           const div = document.createElement('div');
           div.classList.add('navbar','navbar-expand-lg')
-          div.innerHTML = `
-               <div class="col-lg-12 col-md-10">
-                    <a  onclick=clickCatagory('${catagory.category_id}') class="  nav-link active" aria-current="page" href="#">${catagory.category_name}</a>
-               </div>
+          div.innerHTML =  `
           
-          `;
+           <div class="col-lg-12 col-md-10">
+               <a  onclick=clickCatagory('${catagory.category_id}')  class="  nav-link active" aria-current="page" href="#">${catagory.category_name}</a>
+          </div> 
+
+
+          `; 
           setId.appendChild(div)
-     }
+     })  
+     
 }
+
 
 const clickCatagory = ctgNumber =>{
      const url = `https://openapi.programming-hero.com/api/news/category/${ctgNumber}`;
@@ -28,6 +32,7 @@ const clickCatagory = ctgNumber =>{
      .then(data => setNewsCard(data.data))
      .catch(error => console.log(error))
      
+    
 }
 
 const setNewsCard = cards =>{
@@ -43,7 +48,7 @@ const setNewsCard = cards =>{
           return foundResult.innerText = 'no items found'; 
      }
 
-     for( const card of cards ){
+     cards.forEach(card => {
           const div = document.createElement('div')
           div.classList.add('card','mb-3','w-auto','m-auto')
           div.innerHTML = `
@@ -69,7 +74,7 @@ const setNewsCard = cards =>{
                                    
                               </div>
                               <div class="col-3"> 
-                                   <button onclick=clickCatagory('${card.title}'); type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                   <button onclick=openModel('${card._id}'); type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                    Show Details
                                    </button>
                               </div>
@@ -80,23 +85,48 @@ const setNewsCard = cards =>{
           
           `
           setId.appendChild(div)
-     }
+     })
 
 }
 
+const openModel = (newsId) =>{
+     const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
+     fetch(url)
+     .then(res => res.json())
+     .then(data => modelBox(data.data))
+     .catch(error => console.log(error)) 
+}
 
-const openModal = (ppppp)=>{
-     const ggg = clickCatagory()
-     console.log(ggg)
-     const modalBody = document.getElementById('modal-body')
-     modalBody.innerHTML = `
-     <h5 class="modal-title" id="staticBackdropLabel">'${ppppp}'</h5>
-     <p>ghfggjgfhjghj</p>
-     
-     `
+const modelBox = (details)=> {
+     const modelBody =document.getElementById('modal-body')
+     modelBody.innerHTML ='';
+     details.forEach(detail => {
+          const div = document.createElement('div')
+          div.classList.add('modal-body')
+          div.innerHTML = `
+               <img class="w-75 ms-5" src="${detail.author.img}" alt="">
+               <p class="m-0 mt-3"> ${detail.author.name} </p>
+               <p class="m-0"> ${detail.author.published_date} </p>
+               <p class="my-3 fs-2 fw-semibold"> ${detail.title} </p>
+               <p class=""> ${detail.details} </p>
+               
+          `
+          modelBody.appendChild(div)
+     })
 }
 
 
+// clickCatagory('08')
 
 showCatagory()
 
+// const loader = isloding => {
+//      const loaderSection = document.getElementById('loader-id')
+     
+//      if(isloding){
+//           loaderSection.classList.remove('d-none')
+//      }
+//      else{
+//           loaderSection.classList.add('d-none')
+//      }
+// }
