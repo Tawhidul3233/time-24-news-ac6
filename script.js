@@ -29,8 +29,9 @@ const clickCatagory = ctgNumber =>{
      const url = `https://openapi.programming-hero.com/api/news/category/${ctgNumber}`;
      fetch(url)
      .then(res => res.json())
-     .then(data => setNewsCard(data.data))
+     .then(data => setNewsCard(data.data.sort((a, b)=> {return b.total_view - a.total_view})))
      .catch(error => console.log(error))
+     
      
     
 }
@@ -49,6 +50,7 @@ const setNewsCard = cards =>{
      }
 
      cards.forEach(card => {
+          
           const div = document.createElement('div')
           div.classList.add('card','mb-3','w-auto','m-auto')
           div.innerHTML = `
@@ -70,7 +72,7 @@ const setNewsCard = cards =>{
                               </div>
                               <div class="col-3 d-flex ">
                                    <i class="fa-solid fa-users-viewfinder align-self-center"></i>
-                                   <p class="align-self-center m-0 ps-3 fw-semibold">  ${card.total_view} </p>
+                                   <p class="align-self-center m-0 ps-3 fw-semibold">  ${card.total_view ? card.total_view : 'No view'} </p>
                                    
                               </div>
                               <div class="col-3"> 
@@ -85,7 +87,9 @@ const setNewsCard = cards =>{
           
           `
           setId.appendChild(div)
-     })
+     }) 
+     
+     
 
 }
 
