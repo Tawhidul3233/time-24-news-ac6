@@ -24,22 +24,20 @@ const setCatagory = catagorys =>{
      
 }
 
-
 const clickCatagory = ctgNumber =>{
+     loader(true);
      const url = `https://openapi.programming-hero.com/api/news/category/${ctgNumber}`;
      fetch(url)
      .then(res => res.json())
      .then(data => setNewsCard(data.data.sort((a, b)=> {return b.total_view - a.total_view})))
      .catch(error => console.log(error))
      
-     
-    
 }
 
 const setNewsCard = cards =>{
      const setId = document.getElementById('news-card')
      setId.innerHTML = '';
-     
+     loader(false);
      const foundResult = document.getElementById('found-result')
      if(cards.length !== 0){
           const cardsNumber = cards.length
@@ -50,7 +48,7 @@ const setNewsCard = cards =>{
      }
 
      cards.forEach(card => {
-          
+         
           const div = document.createElement('div')
           div.classList.add('card','mb-3','w-auto','m-auto')
           div.innerHTML = `
@@ -87,9 +85,8 @@ const setNewsCard = cards =>{
           
           `
           setId.appendChild(div)
-     }) 
-     
-     
+     })  
+    
 
 }
 
@@ -110,8 +107,9 @@ const modelBox = (details)=> {
           div.innerHTML = `
                <img class="w-75 ms-5" src="${detail.author.img}" alt="">
                <p class="m-0 mt-3"> ${detail.author.name ? detail.author.name : "Authore Name hidden"} </p>
-               <p class="m-0"> ${detail.author.published_date} </p>
+               <p class="m-0"> ${detail.author.published_date}  </p>
                <p class="my-3 fs-2 fw-semibold"> ${detail.title} </p>
+               <p class="my-2 fs-5 fw-semibold"> Total  :  ${detail.total_view} view </p>
                <p class=""> ${detail.details} </p>
                
           `
@@ -119,18 +117,20 @@ const modelBox = (details)=> {
      })
 }
 
+const loader = isloding => {
+     const loaderSection = document.getElementById('loader-id')
+     
+     if(isloding){
+          loaderSection.classList.remove('d-none')
+     }
+     else{
+          loaderSection.classList.add('d-none')
+     }
+}
+
 
 // clickCatagory('08')
 
 showCatagory()
 
-// const loader = isloding => {
-//      const loaderSection = document.getElementById('loader-id')
-     
-//      if(isloding){
-//           loaderSection.classList.remove('d-none')
-//      }
-//      else{
-//           loaderSection.classList.add('d-none')
-//      }
-// }
+
